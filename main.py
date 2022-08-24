@@ -189,7 +189,7 @@ def date_delta_caculate(date_allow):
 
 # 推送
 def push(body):
-    print('- waiting for push result')
+    print('- waiting for push result\n', body)
     # bark push
     if BARK_KEY == '':
         print('*** No BARK_KEY ***\nfinish!')
