@@ -154,14 +154,17 @@ def renew():
         time.sleep(2)
         print('- fill pin')
         write(pin, into=S('@password'))
+        print('click button [Continue]')
         click('Continue')
         wait_until(Text('Contract Extension Confirmation').exists)
+        print('click button [Confirm]')
         click('Confirm')
         if Text('Thank you! The contract has been extended.').exists():
             push('🎉 Thank you! The contract has been extended.')
 
     except Exception as e:
         print(e)
+        #screenshot()
         text_list = find_all(S('.kc2_order_extend_contract_term_container'))
         text = [key.web_element.text for key in text_list][0]
         print('status of vps:', text)
