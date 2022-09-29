@@ -113,10 +113,10 @@ def captcha():
             resultCAPTCHA = text
             print('text:', resultCAPTCHA)
         write(resultCAPTCHA, into=S('@captcha_code'))
-        time.sleep(3)
+        time.sleep(1)
         print('- click button [Login]')
         click('Login')
-        time.sleep(3)
+        time.sleep(5)
         switch_to('EUserv')
 
     except:
@@ -125,16 +125,19 @@ def captcha():
 
 # 续期
 def renew():
-    time.sleep(3)
-    wait_until(Text('vServer').exists)
-    print('- click button [vServer]')
-    click(S('#kc2_order_customer_orders_tab_1'))
-    time.sleep(3)
+    time.sleep(5)
+    try:
+        wait_until(Text('vServer').exists)
+        print('- click button [vServer]')
+        click(S('#kc2_order_customer_orders_tab_1'))
+    except Exception as e:
+            print(e)
+    time.sleep(5)
     try:
         wait_until(Text('Extend contract').exists)
         print('- click button [Extend contract]')
         click('Extend contract')
-        time.sleep(3)
+        time.sleep(5)
         wait_until(Text('Keep existing contract').exists)
         print('- click button [Extend]')
         click(S('.kc2_customer_contract_details_change_plan_item_action_button'))
@@ -151,14 +154,16 @@ def renew():
             wait_until(Text('Thank you! An email with the PIN was send to').exists)
             time.sleep(10)
             pin = get_pin()
-        time.sleep(2)
+        time.sleep(1)
         print('- fill pin')
         write(pin, into=S('@auth'))
         print('click button [Continue]')
         click('Continue')
+        time.sleep(5)
         wait_until(Text('Contract Extension Confirmation').exists)
         print('click button [Confirm]')
         click('Confirm')
+        time.sleep(5)
         if Text('Thank you! The contract has been extended.').exists():
             push('🎉 Thank you! The contract has been extended.')
 
@@ -216,7 +221,7 @@ def push(body):
 # 登陆
 def login_euserv():
     print('- login_euserv')
-    time.sleep(2)
+    time.sleep(5)
     if Text('Login').exists() is False:
         go_to(urlEUserv)
         login_euserv()
@@ -240,7 +245,7 @@ def login_euserv():
         else:
             write(EU_PASS_WD, into=S('@password'))
 
-    time.sleep(2)
+    time.sleep(1)
     print('- click button [Login]')
     click('Login')
     time.sleep(10)
@@ -251,12 +256,16 @@ def login_euserv():
     if Image('CAPTCHA Image').exists():
         print('- CAPTCHA Found')
         captcha()
-        while Text('The captcha solution is not correct.').exists:
-            print('*** The captcha solution is not correct. ***')
-            captcha()
-            if not Text('The captcha solution is not correct.').exists():
-                print('- captcha done')
-                break
+        try:
+            while Text('The captcha solution is not correct.').exists:
+                print('*** The captcha solution is not correct. ***')
+                captcha()
+                if not Text('The captcha solution is not correct.').exists():
+                    print('- captcha done')
+                    break
+        except Exception as e:
+            print(e)
+            screenshot()
     if Text('Confirm or change your customer data here.').exists():
         print('- login success, customer data need to be check')
         scroll_down(800)
@@ -269,7 +278,7 @@ def login_euserv():
     elif Text('To finish the login process enter the PIN that you receive via email.').exists():
         print('*** To finish the login process enter the PIN that you receive via email. ***')
         pin = get_pin()
-        time.sleep(2)
+        time.sleep(1)
         print('- fill pin')
         write(pin, into=S('@pin'))
         print('- click button [Confirm]')
