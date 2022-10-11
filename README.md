@@ -1,3 +1,5 @@
+[![E-Extend](https://github.com/mybdye/E/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/E/actions/workflows/main.yml)
+
 #### ✏️ To Do List
 - [ ] none
 
