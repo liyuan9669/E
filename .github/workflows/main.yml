@@ -10,24 +10,18 @@ on:
 
 jobs:
   build:
-    #runs-on: macos-latest
-    runs-on: macos-12
+    runs-on: ubuntu-latest
+    #runs-on: macos-12
     
     steps:
         - name: 'Checkout codes'
           uses: actions/checkout@v2
-#         - name: 'Set up Python'
-#           uses: actions/setup-python@v2
-#           with:
-#             python-version: '3.9.10'
-        - name: 'Update Chrome'
-          run: |
-              brew reinstall --cask google-chrome
 
-        - name: 'Install requirements'
+        - name: 'Environment Settings'
           run: |
-            python3 -m pip install -r ./requirements.txt
-#            python3 -m pip install --upgrade pip
+            brew upgrade --cask google-chrome
+            pip3 install -r ./requirements.txt
+
         - name: 'Renew'
           env:
             EU_USER_ID: ${{ secrets.EU_USER_ID }}
