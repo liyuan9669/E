@@ -19,6 +19,7 @@ jobs:
 
         - name: 'Environment Settings'
           run: |
+            $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
             brew upgrade --cask google-chrome
             pip3 install -r ./requirements.txt
 
