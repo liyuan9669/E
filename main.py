@@ -194,7 +194,8 @@ def date_delta_caculate(date_allow):
 
 # 推送
 def push(body):
-    print('- waiting for push result\n', body)
+    print('- waiting for push result')
+    #print('body:', body)
     # bark push
     if BARK_KEY == '':
         print('*** No BARK_KEY ***\nfinish!')
@@ -314,7 +315,6 @@ def screenshot():  # debug
     #driver.tab_new(urlMJJ)
     driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
     driver.switch_to.window(driver.window_handles[1])
-    # switch_to('白嫖图床')
     time.sleep(2)
     driver.find_element(By.ID, 'image').send_keys(os.getcwd() + imgScreenShot)
     time.sleep(4)
@@ -322,11 +322,9 @@ def screenshot():  # debug
     wait_until(Text('完成').exists)
     print('- upload done')
     # textList = find_all(S('#code-url'))
-    # result = [key.web_element.text for key in textList][0]
     result = S('#code-url').web_element.text
     print('*** 📷 capture src:', result)
     driver.close()
-    # driver.switch_to.window(driver.window_handles[0])
 
 # 程序开始
 print('- loading...')
