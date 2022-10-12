@@ -20,7 +20,7 @@ jobs:
         - name: 'Environment Settings'
           run: |
             eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-            brew upgrade --cask google-chrome
+            brew install --cask google-chrome
             pip3 install -r ./requirements.txt
 
         - name: 'Renew'
