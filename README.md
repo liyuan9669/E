@@ -22,4 +22,6 @@
 - https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
 - https://github.com/mherrmann/selenium-python-helium/blob/master/helium/__init__.py
 
+## 注意命名 `pin`
+
 <img src='https://github.com/MSE5/E/blob/main/pin.png'> <br/>
