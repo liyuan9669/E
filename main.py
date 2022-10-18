@@ -131,54 +131,59 @@ def renew():
         wait_until(Text('vServer').exists)
         print('- click button [vServer]')
         click(S('#kc2_order_customer_orders_tab_1'))
-    except Exception as e:
-            print(e)
-    time.sleep(5)
-    try:
-        wait_until(Text('Extend contract').exists)
-        print('- click button [Extend contract]')
-        click('Extend contract')
-        time.sleep(5)
-        wait_until(Text('Keep existing contract').exists)
-        print('- click button [Extend]')
-        click(S('.kc2_customer_contract_details_change_plan_item_action_button'))
-        time.sleep(5)
-        wait_until(Text('Security check').exists)
-        print('- Security check')
-        time.sleep(10)
-        try:
-            pin = get_pin()
-        except Exception as e:
-            print(e)
-            print('- Send new PIN')
-            click(S('.btn btn-primary btn-sm'))
-            wait_until(Text('Thank you! An email with the PIN was send to').exists)
+        time.sleep(8)
+        if Text('Extend contract').exists():
+            #wait_until(Text('Extend contract').exists)
+            print('- click button [Extend contract]')
+            click('Extend contract')
+            time.sleep(5)
+            wait_until(Text('Keep existing contract').exists)
+            print('- click button [Extend]')
+            click(S('.kc2_customer_contract_details_change_plan_item_action_button'))
+            time.sleep(5)
+            wait_until(Text('Security check').exists)
+            print('- Security check')
             time.sleep(10)
-            pin = get_pin()
-        time.sleep(1)
-        print('- fill pin')
-        write(pin, into=S('@auth'))
-        print('click button [Continue]')
-        click('Continue')
-        time.sleep(5)
-        wait_until(Text('Contract Extension Confirmation').exists)
-        print('click button [Confirm]')
-        click('Confirm')
-        time.sleep(5)
-        if Text('Thank you! The contract has been extended.').exists():
-            push('%s: 🎉 Thank you! The contract has been extended.' % userId)
+            try:
+                pin = get_pin()
+            except Exception as e:
+                print(e)
+                print('- Send new PIN')
+                click(S('.btn btn-primary btn-sm'))
+                wait_until(Text('Thank you! An email with the PIN was send to').exists)
+                time.sleep(10)
+                pin = get_pin()
+            time.sleep(1)
+            print('- fill pin')
+            write(pin, into=S('@auth'))
+            print('click button [Continue]')
+            click('Continue')
+            time.sleep(5)
+            wait_until(Text('Contract Extension Confirmation').exists)
+            print('click button [Confirm]')
+            click('Confirm')
+            time.sleep(5)
+            if Text('Thank you! The contract has been extended.').exists():
+                push('%s: 🎉 Thank you! The contract has been extended.' % userId)
 
+        else: 
+            #screenshot()
+            try:
+                text_list = find_all(S('.kc2_order_extend_contract_term_container'))
+                text = [key.web_element.text for key in text_list][0]
+                print('status of vps:', text)
+                date_delta = date_delta_caculate(text.split(' ')[-1])
+                if date_delta > 0:
+                    print('%s: *** No Need To Renew ***\n%d Days Left!' % (userId, date_delta))
+                    body = '%s\n%s: *** No Need To Renew ***\n%d Days Left!' % (text, userId, date_delta)
+                    push(body)
+            except Exception as e:
+            print(e)
+            push(e)
     except Exception as e:
-        print(e)
-        #screenshot()
-        text_list = find_all(S('.kc2_order_extend_contract_term_container'))
-        text = [key.web_element.text for key in text_list][0]
-        print('status of vps:', text)
-        date_delta = date_delta_caculate(text.split(' ')[-1])
-        if date_delta > 0:
-            print('%s: *** No Need To Renew ***\n%d Days Left!' % (userId, date_delta))
-            body = '%s\n%s: *** No Need To Renew ***\n%d Days Left!' % (text, userId, date_delta)
-            push(body)
+            print(e)
+            push(e)
+    
 
 # 日期计算
 def date_delta_caculate(date_allow):
