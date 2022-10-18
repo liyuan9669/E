@@ -178,8 +178,8 @@ def renew():
                     body = '%s\n%s: *** No Need To Renew ***\n%d Days Left!' % (text, userId, date_delta)
                     push(body)
             except Exception as e:
-            print(e)
-            push(e)
+                print(e)
+                push(e)
     except Exception as e:
             print(e)
             push(e)
