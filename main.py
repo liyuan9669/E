@@ -266,8 +266,8 @@ def login_euserv():
                     print('- captcha done')
                     break
         except Exception as e:
-            print(e)
-            screenshot()
+            print('captcha error:', e)
+            #screenshot()
     if Text('Confirm or change your customer data here.').exists():
         print('- login success, customer data need to be check')
         scroll_down(800)
