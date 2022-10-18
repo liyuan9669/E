@@ -166,7 +166,7 @@ def renew():
         click('Confirm')
         time.sleep(5)
         if Text('Thank you! The contract has been extended.').exists():
-            push('🎉 %s Thank you! The contract has been extended.' % userId)
+            push('%s: 🎉 Thank you! The contract has been extended.' % userId)
 
     except Exception as e:
         print(e)
@@ -176,8 +176,8 @@ def renew():
         print('status of vps:', text)
         date_delta = date_delta_caculate(text.split(' ')[-1])
         if date_delta > 0:
-            print('*** %s No Need To Renew ***\n%d Days Left!' % (userId, date_delta))
-            body = '%s\n*** %s No Need To Renew ***\n%d Days Left!' % (text, userId, date_delta)
+            print('%s: *** No Need To Renew ***\n%d Days Left!' % (userId, date_delta))
+            body = '%s\n%s: *** No Need To Renew ***\n%d Days Left!' % (text, userId, date_delta)
             push(body)
 
 # 日期计算
