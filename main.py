@@ -66,7 +66,7 @@ except:
     TG_USER_ID = ''
 
 title = 'EUserv Extend'
-userId = str(EU_USER_ID[:3]+'****'+EU_USER_ID[-3:])
+userId = str(EU_USER_ID[:2]+'****'+EU_USER_ID[-2:])
 imgFile = '/imgCAPTCHA.png'
 imgScreenShot = '/imgScreenShot.png'
 urlEUserv = 'https://support.euserv.com/'
@@ -176,8 +176,8 @@ def renew():
         print('status of vps:', text)
         date_delta = date_delta_caculate(text.split(' ')[-1])
         if date_delta > 0:
-            print('*** No Need To Renew ***\n %d Days Left!' % date_delta)
-            body = '%s\n*** %s No Need To Renew ***\n%s Days Left!' % (text, userId, date_delta)
+            print('*** %s No Need To Renew ***\n%d Days Left!' % (userId, date_delta))
+            body = '%s\n*** %s No Need To Renew ***\n%d Days Left!' % (text, userId, date_delta)
             push(body)
 
 # 日期计算
