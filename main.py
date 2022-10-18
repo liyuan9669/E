@@ -66,6 +66,7 @@ except:
     TG_USER_ID = ''
 
 title = 'EUserv Extend'
+userId = str(EU_USER_ID[:3]+'****'+EU_USER_ID[-3:])
 imgFile = '/imgCAPTCHA.png'
 imgScreenShot = '/imgScreenShot.png'
 urlEUserv = 'https://support.euserv.com/'
@@ -165,7 +166,7 @@ def renew():
         click('Confirm')
         time.sleep(5)
         if Text('Thank you! The contract has been extended.').exists():
-            push('🎉 Thank you! The contract has been extended.')
+            push('🎉 %s Thank you! The contract has been extended.' % userId)
 
     except Exception as e:
         print(e)
@@ -176,7 +177,7 @@ def renew():
         date_delta = date_delta_caculate(text.split(' ')[-1])
         if date_delta > 0:
             print('*** No Need To Renew ***\n %d Days Left!' % date_delta)
-            body = text + '\n*** No Need To Renew ***\n' + str(date_delta) + ' Days Left!'
+            body = '%s\n*** %s No Need To Renew ***\n%s Days Left!' % (text, userId, date_delta)
             push(body)
 
 # 日期计算
