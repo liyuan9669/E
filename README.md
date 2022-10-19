@@ -1,12 +1,13 @@
 [![E-Extend](https://github.com/mybdye/E/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/E/actions/workflows/main.yml)
 
-#### ✏️ To Do List
-- [ ] none
+#### ✏️
+- 10.18
+  - Add the userId(with'****') to the push content
 
-#### ㊙️ SECRET
+#### ㊙️
 |SECRET NAME|SECRET VALUE                                                                                            |
 |-----|-------------------------------------------------------------------------------------------------------------|
-|`EU_USER_ID`| 你的 EU 账号                                                                                                    |
+|`EU_USER_ID`| 你的 EU 账号(id 或 邮箱)                                                                                                    |
 |`EU_PASS_WD`| 你的 EU 密码                                                                                                    |
 |`CAPTCHA_USER_ID`| True Captcha 账号 https://apitruecaptcha.org/                                                                 |
 |`CAPTCHA_APIKEY`| True Captcha APIKEY                                                                                         |
@@ -16,7 +17,7 @@
 |`TG_USER_ID`| (可选) 给 bot `@userinfobot` 发送 `/start`                                                                       |
 
 
-#### 📚 资料参考
+#### 📚
 - https://www.python.org/
 - https://www.selenium.dev/
 - https://github.com/actions/virtual-environments/blob/main/images/macos/macos-12-Readme.md
