@@ -314,22 +314,17 @@ def get_pin():
     return pin
 
 # 截图(debug)
-def screenshot():  # debug
+def screenshot():
     driver = get_driver()
     driver.get_screenshot_as_file(os.getcwd() + imgScreenShot)
     print('- screenshot done')
-    #driver.tab_new(urlMJJ)
-    driver.execute_script('''window.open('http://mjjzp.cf/',"_blank")''')
-    driver.switch_to.window(driver.window_handles[1])
-    time.sleep(2)
-    driver.find_element(By.ID, 'image').send_keys(os.getcwd() + imgScreenShot)
-    time.sleep(4)
-    click('上传')
-    wait_until(Text('完成').exists)
-    print('- upload done')
-    # textList = find_all(S('#code-url'))
-    result = S('#code-url').web_element.text
-    print('*** 📷 capture src:', result)
+    start_chrome('http://imgur.com/upload')
+    driver = get_driver()
+    time.sleep(5)
+    driver.find_element(By.ID, 'file-input').send_keys(os.getcwd() + imgScreenShot)
+    time.sleep(5)
+    wait_until(Text('POST').exists)
+    print('- img uploaded and the 📷 capture src is:', driver.current_url)
     driver.close()
 
 # 程序开始
